@@ -1,0 +1,5 @@
+package objectPool
+
+class Object {
+
+}
