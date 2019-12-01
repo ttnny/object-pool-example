@@ -1,7 +1,9 @@
 package objectPool
 
-class Object {
-    // Going to have some kind of STATE here
-    // to demonstrate STATE resetting before
-    // putting back to the Pool
+// On  (1) : working object
+// Off (0) : free object
+data class Object(var state: Int = 1) {
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
 }

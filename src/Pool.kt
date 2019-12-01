@@ -27,6 +27,7 @@ class Pool {
             }
         } else {
             val obj = freeObjects.remove()
+            obj.state = 1 // set its state
             busyObjects.add(obj)
             println("\n-> Here is your object: ${obj.hashCode()}")
         }
@@ -39,7 +40,9 @@ class Pool {
         if (busyObjects.isEmpty()) {
             println("\n-> Nothing to return.")
         } else {
-            freeObjects.add(busyObjects.remove())
+            var obj = busyObjects.remove()
+            obj.state = 0 // reset its state
+            freeObjects.add(obj)
             println("\n-> Object's state has been cleared. Object coming back to the pool.")
         }
 
@@ -48,18 +51,18 @@ class Pool {
 
     // List all objects in the pool
     private fun listObjects() {
-        println("\n------------- TOTAL OBJECTS in POOL -------------")
+        println("\n---------------- TOTAL OBJECTS in POOL ----------------")
         print("Free Objects: ")
         for (obj in freeObjects) {
-            print(obj.hashCode())
+            print("${obj.hashCode()}(${obj.state}) ")
         }
         println()
 
         print("Busy Objects: ")
         for (obj in busyObjects) {
-            print("${obj.hashCode()}, ")
+            print("${obj.hashCode()}(${obj.state}) ")
         }
-        println("\n-------------------------------------------------\n")
+        println("\n-------------------------------------------------------\n")
 
         nav()
     }
