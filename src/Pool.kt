@@ -2,18 +2,15 @@ package objectPool
 
 import java.util.*
 
-class Pool(
-    private val client: Client
-) {
-
-    // The Pool (Singleton)
+class Pool {
+    // The Pool (can be Singleton or Multiton )
     companion object Pool {
         private var freeObjects: Queue<Object> = LinkedList<Object>()
         private var busyObjects: Queue<Object> = LinkedList<Object>()
         private const val MAX_NUM_OF_OBJECTS: Int = 3
 
         init {
-            println("Creating a Pool (Singleton)...")
+            println("Creating a Pool...")
             println("Pool ${this.hashCode()} created.\n")
         }
     }
@@ -22,31 +19,31 @@ class Pool(
     private fun getObject() {
         if (freeObjects.isEmpty()) {
             if (busyObjects.size == MAX_NUM_OF_OBJECTS) { // or we can do resize
-                println("\n-> No free object. Pool is full. Please try back.\n")
+                println("\n-> No free object. Pool is full. Please try back.")
             } else {
                 val obj = Object()
                 busyObjects.add(obj)
-                println("\n-> Here is your object: ${obj.hashCode()}\n")
+                println("\n-> Here is your object: ${obj.hashCode()}")
             }
         } else {
             val obj = freeObjects.remove()
             busyObjects.add(obj)
-            println("\n-> Here is your object: ${obj.hashCode()}\n")
+            println("\n-> Here is your object: ${obj.hashCode()}")
         }
 
-        nav()
+        listObjects()
     }
 
     // Should we just reset the state or destroy it???
     private fun returnObject() {
         if (busyObjects.isEmpty()) {
-            println("\n-> Nothing to return.\n")
+            println("\n-> Nothing to return.")
         } else {
             freeObjects.add(busyObjects.remove())
-            println("\n-> Object's state has been cleared. Object coming back to the pool.\n")
+            println("\n-> Object's state has been cleared. Object coming back to the pool.")
         }
 
-        nav()
+        listObjects()
     }
 
     // List all objects in the pool
@@ -69,7 +66,7 @@ class Pool(
 
     // Navigation
     fun nav() {
-        println("Menu Options for Client ${client.hashCode()}")
+        println("Menu Options:")
         print(
             """
                 1. Gimme an object
