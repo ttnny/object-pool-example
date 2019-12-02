@@ -5,8 +5,8 @@ import java.util.*
 class Pool {
     // The Pool (can be Singleton or Multiton )
     companion object Pool {
-        private var freeObjects: Queue<Object> = LinkedList<Object>()
-        private var busyObjects: Queue<Object> = LinkedList<Object>()
+        private var freeObjects: Queue<DBObject> = LinkedList<DBObject>()
+        private var busyObjects: Queue<DBObject> = LinkedList<DBObject>()
         private const val MAX_NUM_OF_OBJECTS: Int = 3
 
         init {
@@ -21,7 +21,7 @@ class Pool {
             if (busyObjects.size == MAX_NUM_OF_OBJECTS) { // or we can do resize
                 println("\n-> No free object. Pool is full. Please try back.")
             } else {
-                val obj = Object()
+                val obj = DBObject()
                 busyObjects.add(obj)
                 println("\n-> Here is your object: ${obj.hashCode()}")
             }
@@ -40,7 +40,7 @@ class Pool {
         if (busyObjects.isEmpty()) {
             println("\n-> Nothing to return.")
         } else {
-            var obj = busyObjects.remove()
+            val obj = busyObjects.remove()
             obj.state = 0 // reset its state
             freeObjects.add(obj)
             println("\n-> Object's state has been cleared. Object coming back to the pool.")
