@@ -51,18 +51,18 @@ class Pool {
 
     // List all objects in the pool
     private fun listObjects() {
-        println("\n---------------- TOTAL OBJECTS in POOL ----------------")
-        print("Free Objects: ")
+        println("\n----------- TOTAL OBJECTS in POOL (MAX is $MAX_NUM_OF_OBJECTS) -----------")
+        print(" Free Objects: ")
         for (obj in freeObjects) {
             print("${obj.hashCode()}(${obj.state}) ")
         }
         println()
 
-        print("Busy Objects: ")
+        print(" Busy Objects: ")
         for (obj in busyObjects) {
             print("${obj.hashCode()}(${obj.state}) ")
         }
-        println("\n-------------------------------------------------------\n")
+        println("\n--------------------------------------------------------\n")
 
         nav()
     }
