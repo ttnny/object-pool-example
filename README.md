@@ -5,7 +5,7 @@ This repo is an example to demonstrate how the Object Pool Design Pattern works.
 
 A **creational** design pattern.
 
-> Reusing the object that are expensive or slow to instantiate.
+> This pattern allows to reuse the objects that are expensive or slow to instantiate.
 The pool is a container which contains a specified amount of objects. When an object is taken from the pool, it is not available in the pool until it is put back. Objects in the pool have a lifecycle: creation, validation and destroy.
 >
 > — Javatpoint.com
